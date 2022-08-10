@@ -1,0 +1,28 @@
+@php
+  Theme::set('page', $page);
+@endphp
+
+@if (in_array($page->template, ['default', 'full-width']))
+    <div class="bgheadproject hidden-xs" style="background: url('https://thomasnguyen.com.vn/storage/icon/1.png')">
+        <div class="description">
+            <div class="container-fluid w90">
+                <h1 class="text-center">{{ $page->name }}</h1>
+                <p class="text-center">Fast and professional information transmission</p>
+                {!! Theme::partial('breadcrumb') !!}
+            </div>
+        </div>
+    </div>
+    <div class="@if ($page->template != 'full-width') container @endif padtop50">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="scontent">
+                    {!! apply_filters(PAGE_FILTER_FRONT_PAGE_CONTENT, BaseHelper::clean($page->content), $page) !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+@else
+    {!! apply_filters(PAGE_FILTER_FRONT_PAGE_CONTENT, BaseHelper::clean($page->content), $page) !!}
+@endif
